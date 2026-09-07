@@ -64,17 +64,13 @@ public class FirebaseConfig {
                 credentials = GoogleCredentials.fromStream(stream);
             }
         } else {
-            // 3. Fallback to Google Application Default Credentials or throw clear error
+            // 3. Fallback to Google Application Default Credentials or skip initialization if not available
             try {
                 credentials = GoogleCredentials.getApplicationDefault();
                 logger.info("Loading Firebase credentials from Google Application Default Credentials.");
             } catch (Exception ex) {
-                throw new IllegalStateException(
-                    "Firebase Admin SDK initialization failed: No credentials found.\n" +
-                    "Please set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of your Firebase service-account JSON file\n" +
-                    "or specify 'firebase.credentials.path' in application.properties.",
-                    ex
-                );
+                logger.warn("Firebase credentials not found; skipping Firebase initialization. Reason: {}", ex.getMessage());
+                return; // Skip initialization when credentials are unavailable
             }
         }
 

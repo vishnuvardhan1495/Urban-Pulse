@@ -43,3 +43,5 @@ Thumbs.db
 *.pem
 credentials.json
 serviceAccountKey.json
+
+citizen-app-test/
