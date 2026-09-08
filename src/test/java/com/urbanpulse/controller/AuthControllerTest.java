@@ -40,6 +40,9 @@ class AuthControllerTest {
     @MockBean
     private UserService userService;
 
+    @MockBean
+    private com.urbanpulse.repository.UserRepository userRepository;
+
     // ==========================================
     // POST /api/auth/login tests (Phase 6)
     // ==========================================
